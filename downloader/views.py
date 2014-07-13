@@ -1,15 +1,14 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response, RequestContext
-from django.core.files.base import ContentFile
 from django.core.servers.basehttp import FileWrapper
 from .models import File
 from django.conf import settings
+from tasks import run_processors
 
 import os
 import mimetypes
 
 
-def download(request, file_name, extension, file_id):
+def download(request, file_id):
     file_obj = File.objects.get(id=file_id)
     file_url = settings.PROJECT_PATH + file_obj.file.url
     wrapper = FileWrapper(file(file_url, 'rb'))
@@ -17,3 +16,11 @@ def download(request, file_name, extension, file_id):
     response['Content-Length'] = os.path.getsize(file_url)
     response['Content-Disposition'] = "attachment; filename=" + file_obj.file_name
     return response
+
+
+def parse(request, file_id):
+    file_obj = File.objects.get(id=file_id)
+    if file_obj:
+        run_processors(file_obj)
+    return HttpResponseRedirect('/admin/main/teacher/')
+

@@ -1,5 +1,6 @@
 from django.db import models
 from optparse import _
+from django.contrib.auth.models import User
 import sys
 import os
 import urllib2
@@ -9,6 +10,7 @@ from urlparse import urlparse
 
 
 class FileCategory(models.Model):
+    name = models.CharField(verbose_name=_('Name'), max_length=255, blank=False)
     code_name = models.CharField(verbose_name=_('Code name'), max_length=255, blank=False)
     is_active = models.BooleanField(_('Is active'), default=True)
 
@@ -21,6 +23,7 @@ class FileCategory(models.Model):
 
 
 class File(models.Model):
+    #user = models.ForeignKey(User, verbose_name=_('User'), null=True, blank=True)
     file_name = models.CharField(verbose_name=_('File name'), max_length=255)
     file_url = models.URLField(verbose_name=_('URL'), default='http://wimii.pcz.pl/download/plan_stacjonarny/Plan_dzienne_lato_13_14_3_nauczyciel.html')
     file = models.FileField(verbose_name=_('File'), upload_to='uploads/schedules/%Y-%m/', blank=True, null=True)
@@ -32,33 +35,22 @@ class File(models.Model):
         verbose_name = _('File')
         verbose_name_plural = _('Files')
 
-    #latest_dir = os.path.join(settings.MEDIA_ROOT, 'uploads/latest')
-    #archive_dir = os.path.join(settings.MEDIA_ROOT, 'uploads/archive')
-
     def save(self, *args, **kwargs):
         if not self.file:
             download_content_from_site(self)
-            # if os.path.exists(os.path.join(self.latest_dir, self.file_name)):
-            #     import shutil
-            #     import datetime
-            #     new_file_name = \
-            #         os.path.join(self.archive_dir, datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S_")+self.file_name)
-            #     shutil.move(os.path.join(self.latest_dir, self.file_name), new_file_name)
-            #     download_content_from_site(self)
-            # else:
-            #     download_content_from_site(self)
         super(File, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        storage, path = self.file.storage, self.file.path
-        super(File, self).delete(*args, **kwargs)
-        storage.delete(path)
+        if self.file:
+            storage, path = self.file.storage, self.file.path
+            super(File, self).delete(*args, **kwargs)
+            storage.delete(path)
 
     def extra_options(self):
         if self.file:
-            new_name = self.file_name.replace('.', '-')
-            return "<a href='/download/%s-%s'>Download</a>" % (new_name, self.id)
-            #return "<a href='%s'>Download</a>" % (self.file.url,)
+            return "<a href='/download/%s'>Download</a><br>" \
+                   "<a href='/parse/%s'>Parse</a>" \
+                   % (self.id, self.id)
         else:
             return "No attachment"
 
@@ -69,6 +61,7 @@ class File(models.Model):
         return self.addition_time.strftime("%d %b %Y %H:%M:%S")
 
     uptime.short_description = 'Date'
+    uptime.admin_order_field = 'addition_time'
 
     def __unicode__(self):
         return self.file_name
@@ -85,3 +78,12 @@ def download_content_from_site(self):
     req = urllib2.Request(self.file_url, headers=headers)
     content = urllib2.urlopen(req).read()
     self.file.save(self.file_name, ContentFile(content), save=True)
+
+
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
+
+
+@receiver(pre_delete, sender=File)
+def file_delete(sender, instance, **kwargs):
+    instance.file.delete(False)

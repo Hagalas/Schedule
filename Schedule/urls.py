@@ -8,8 +8,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admin/filebrowser/', include(site.urls)),
     (r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^download/(?P<file_name>\w+)-(?P<extension>\w+)-(?P<file_id>\w+)/$', 'downloader.views.download', name='download'),
+    (r'^admin/', include(admin.site.urls)),
+    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^download/(?P<file_id>\w+)/$', 'downloader.views.download', name='download'),
+    url(r'^parse/(?P<file_id>\w+)/$', 'downloader.views.parse', name='parse'),
 )
 
 if settings.DEBUG:
