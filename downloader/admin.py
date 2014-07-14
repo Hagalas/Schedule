@@ -14,5 +14,3 @@ class FileCategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(File, FileAdmin)
 admin.site.register(FileCategory, FileCategoryAdmin)
-
-

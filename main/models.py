@@ -1,5 +1,6 @@
 # coding=utf-8
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class DayTime(models.Model):
@@ -28,13 +29,13 @@ class DayTime(models.Model):
         (12, '19-20'),
 
     )
-    day = models.IntegerField(choices=DAY_CHOICES)
-    hour = models.IntegerField(choices=HOUR_CHOICES)
+    day = models.IntegerField(_('Day'), choices=DAY_CHOICES)
+    hour = models.IntegerField(_('Hour'), choices=HOUR_CHOICES)
     ordering = ['id']
 
     class Meta:
-        verbose_name = 'Day time'
-        verbose_name_plural = 'Day times'
+        verbose_name = _('Day time')
+        verbose_name_plural = _('Day times')
 
     def __unicode__(self):
         return unicode(self.DAY_CHOICES[self.day][1])+" "+unicode(self.HOUR_CHOICES[self.hour][1])
@@ -48,29 +49,29 @@ class Subject(models.Model):
         (4, 'E-Learning')
     )
 
-    name = models.CharField(max_length=100)
-    ects = models.IntegerField(null=True, blank=True)
-    exam = models.BooleanField(blank=True)
-    type = models.IntegerField(choices=SUBJECT_TYPE_CHOICES, blank=True, null=True)
+    name = models.CharField(_('Name'), max_length=100)
+    ects = models.IntegerField(_('ECTS'), null=True, blank=True)
+    exam = models.BooleanField(_('Exam'), blank=True)
+    type = models.IntegerField(_('Type'), choices=SUBJECT_TYPE_CHOICES, blank=True, null=True)
 
     class Meta:
-        verbose_name = 'Subject'
-        verbose_name_plural = 'Subjects'
+        verbose_name = _('Subject')
+        verbose_name_plural = _('Subjects')
 
     def __unicode__(self):
         return self.name
 
 
 class Group(models.Model):
-    group_nr = models.IntegerField(blank=True, null=True)
-    semester = models.IntegerField(blank=True)
-    field_of_study = models.CharField(max_length=50, blank=True, null=True)
-    degree = models.IntegerField(blank=True)
-    specialization = models.CharField(max_length=100, blank=True, null=True)
+    group_nr = models.IntegerField(_('Group number'), blank=True, null=True)
+    semester = models.IntegerField(_('Semester'), blank=True)
+    field_of_study = models.CharField(_('Field of study'), max_length=50, blank=True, null=True)
+    degree = models.IntegerField(_('Degree'), blank=True)
+    specialization = models.CharField(_('Specialization'), max_length=100, blank=True, null=True)
 
     class Meta:
-        verbose_name = 'Group'
-        verbose_name_plural = 'Groups'
+        verbose_name = _('Group')
+        verbose_name_plural = _('Groups')
 
     def __unicode__(self):
         return "%s spec:%s st:%d sem:%d gr:%d" \
@@ -78,70 +79,70 @@ class Group(models.Model):
 
 
 class Faculty(models.Model):
-    name = models.CharField(max_length=45, null=True, blank=True)
-    address = models.CharField(max_length=100, null=True, blank=True)
-    phone_number = models.CharField(max_length=12, null=True, blank=True)
+    name = models.CharField(_('Name'), max_length=45, null=True, blank=True)
+    address = models.CharField(_('Address'), max_length=100, null=True, blank=True)
+    phone_number = models.CharField(_('Phone number'), max_length=12, null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Faculty'
-        verbose_name_plural = 'Faculties'
+        verbose_name = _('Faculty')
+        verbose_name_plural = _('Faculties')
 
     def __unicode__(self):
         return self.name
 
 
 class Room(models.Model):
-    room_number = models.CharField(max_length=5, null=True, blank=True, default='0')
-    faculty = models.ForeignKey('Faculty')
+    room_number = models.CharField(_('Room number'), max_length=5, null=True, blank=True, default='0')
+    faculty = models.ForeignKey('Faculty', verbose_name=_('Faculty'))
 
     class Meta:
-        verbose_name = 'Room'
-        verbose_name_plural = 'Rooms'
+        verbose_name = _('Room')
+        verbose_name_plural = _('Rooms')
 
     def __unicode__(self):
         return unicode(self.faculty)+" "+self.room_number
 
 
 class Teacher(models.Model):
-    name = models.CharField(max_length=45)
-    surname = models.CharField(max_length=45)
-    degree = models.CharField(max_length=45)
-    room = models.ForeignKey('Room', null=True, blank=True)
-    faculty = models.ForeignKey('Faculty')
-    email = models.CharField(max_length=45, null=True, blank=True)
-    phone_number = models.CharField(max_length=12, null=True, blank=True)
+    name = models.CharField(_('Name'), max_length=45)
+    surname = models.CharField(_('Surname'), max_length=45)
+    degree = models.CharField(_('Degree'), max_length=45)
+    room = models.ForeignKey('Room', verbose_name=_('Room'), null=True, blank=True)
+    faculty = models.ForeignKey('Faculty', verbose_name=_('Faculty'))
+    email = models.CharField(_('Email'), max_length=45, null=True, blank=True)
+    phone_number = models.CharField(_('Phone number'), max_length=12, null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Teacher'
-        verbose_name_plural = 'Teachers'
+        verbose_name = _('Teacher')
+        verbose_name_plural = _('Teachers')
 
     def __unicode__(self):
         return self.name+" "+self.surname
 
 
 class Consultations(models.Model):
-    teacher = models.ForeignKey('Teacher')
-    hour = models.ForeignKey('DayTime')
-    faculty = models.ForeignKey('Faculty')
+    teacher = models.ForeignKey('Teacher', verbose_name=_('Teacher'))
+    hour = models.ForeignKey('DayTime', verbose_name=_('Hour'))
+    faculty = models.ForeignKey('Faculty', verbose_name=_('Faculty'))
 
     class Meta:
-        verbose_name = 'Consultations'
-        verbose_name_plural = 'Consultations'
+        verbose_name = _('Consultations')
+        verbose_name_plural = _('Consultations')
 
     def __unicode__(self):
         return self.teacher.name+" "+self.teacher.surname+" "+unicode(self.hour)
 
 
 class Schedule(models.Model):
-    subject = models.ForeignKey('Subject')
-    day_time = models.ForeignKey('DayTime')
-    group = models.ForeignKey('Group')
-    teacher = models.ForeignKey('Teacher')
-    room = models.ForeignKey('Room')
+    subject = models.ForeignKey('Subject', verbose_name=_('Subject'))
+    day_time = models.ForeignKey('DayTime', verbose_name=_('Day time'))
+    group = models.ForeignKey('Group', verbose_name=_('Group'))
+    teacher = models.ForeignKey('Teacher', verbose_name=_('Teacher'))
+    room = models.ForeignKey('Room', verbose_name=_('Room'))
 
     class Meta:
-        verbose_name = 'Schedule'
-        verbose_name_plural = 'Schedules'
+        verbose_name = _('Schedule')
+        verbose_name_plural = _('Schedules')
 
     def __unicode__(self):
         return self.subject.name
