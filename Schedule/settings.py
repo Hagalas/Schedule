@@ -12,8 +12,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ScheduleDB',
         'USER': 'root',
         'PASSWORD': 'toor',
         'HOST': '',
@@ -29,7 +29,8 @@ ALLOWED_HOSTS = ['*']
 
 TIME_ZONE = 'Europe/Warsaw'
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us'  # 'en-us'
+LOCALE_PATHS = (os.path.join(PROJECT_PATH, 'locale'), )
 
 SITE_ID = 1
 
@@ -49,8 +50,8 @@ STATICFILES_DIRS = (
 )
 
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -77,18 +78,24 @@ ROOT_URLCONF = 'Schedule.urls'
 WSGI_APPLICATION = 'Schedule.wsgi.application'
 
 import os
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_PATH, 'templates')
+)
 
-INSTALLED_APPS = (
+
+sys.path.append('%s/apps' % PROJECT_PATH)
+LOCAL_APPS = (
+    'main',
+    'downloader',
+)
+
+INSTALLED_APPS = LOCAL_APPS + (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'main',
-    'downloader',
 
     'south',
     'grappelli',
@@ -97,6 +104,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
 )
+
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
