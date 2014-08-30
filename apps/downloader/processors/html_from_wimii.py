@@ -2,6 +2,7 @@
 import sys
 import re
 from bs4 import BeautifulSoup
+from html_from_wimii_tables import table_2, table_17
 from regexes import get_teacher
 from main.models import Consultations, DayTime, Faculty, Group, Room, Schedule, Subject, Teacher
 
@@ -11,7 +12,22 @@ class HtmlFromWimiiProcessor(object):
     Processor which gets or creates a list of groups and their schedules on University
     from html file downloaded from University's website.
     """
+    tables_codenames = {
+        'table_2': table_2,
+        # 'table_17': table_17
+    }
+
+    @staticmethod
+    def run_through_tables(dct, html_doc):
+        for k, v in dct.iteritems():
+            v.run(html_doc)
+
     def process(self, file_obj):
+        file_content = str(file_obj.file.file)
+        with open(file_content) as html_doc:
+            self.run_through_tables(self.tables_codenames, html_doc)
+
+    def process2(self, file_obj):
         file_content = str(file_obj.file.file)
         with open(file_content) as html_doc:
             try:

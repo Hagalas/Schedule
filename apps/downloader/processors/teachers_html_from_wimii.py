@@ -13,6 +13,7 @@ class TeachersHtmlFromWimiiProcessor(object):
         teachers_pattern_results = []
         teachers_list = []
         text = []
+
         file_content = str(file_obj.file.file)
         with open(file_content) as html_doc:
             try:
@@ -22,9 +23,9 @@ class TeachersHtmlFromWimiiProcessor(object):
                     (r'^(\w*-{0,1}\w+)\s{1}(\w+.?)\s{1,2}(\w+.?\s*\w*.?\s{0,1}\w*.?\s*\w*.?\s*\w*.?\s*\w*.?\s*\w*.?)\s*/{1}(\w*)/{1}$',
                      re.UNICODE)
 
-                a_hrefs = [link for link in soup.find_all('a') if link.get_text() != '']
+                links = [link for link in soup.find_all('a') if link.get_text() != '']
 
-                for link in a_hrefs:
+                for link in links:
                     text.append(link.get_text())
                     teachers_list.append(Teacher())
 

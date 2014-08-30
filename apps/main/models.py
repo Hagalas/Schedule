@@ -3,6 +3,17 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
+class GetOrNoneManager(models.Manager):
+    """
+    Adds get_or_none method to objects
+    """
+    def get_or_none(self, **kwargs):
+        try:
+            return self.get(**kwargs)
+        except self.model.DoesNotExist:
+            return None
+
+
 class DayTime(models.Model):
     MONDAY = 1
     TUESDAY = 2
@@ -107,14 +118,14 @@ class Faculty(models.Model):
 
 class Room(models.Model):
     room_number = models.CharField(_('Room number'), max_length=15, blank=True, default='0')
-    faculty = models.ForeignKey('Faculty', verbose_name=_('Faculty'))
+    faculty = models.ForeignKey('Faculty', verbose_name=_('Faculty'), null=True, blank=True)
 
     class Meta:
         verbose_name = _('Room')
         verbose_name_plural = _('Rooms')
 
     def __unicode__(self):
-        return unicode(self.faculty)+" "+self.room_number
+        return "%s - %s" % (self.room_number, self.faculty)
 
 
 class Teacher(models.Model):
@@ -125,6 +136,8 @@ class Teacher(models.Model):
     faculty = models.ForeignKey('Faculty', verbose_name=_('Faculty'))
     phone_number = models.CharField(_('Phone number'), max_length=12, blank=True)
     room = models.ForeignKey('Room', verbose_name=_('Room'), null=True, blank=True)
+
+    objects = GetOrNoneManager()
 
     class Meta:
         verbose_name = _('Teacher')
@@ -168,10 +181,18 @@ class Schedule(models.Model):
         verbose_name_plural = _('Schedule')
 
     def teacher_names(self):
-        return ' , '.join([unicode(t) for t in self.teachers.all()])
+        return ' , '.join(
+            ["<a href='/admin/main/teacher/%s'>" % t.id + unicode(t) + "</a>" for t in self.teachers.all()]
+        )
 
     teacher_names.allow_tags = True
     teacher_names.short_description = _('Teachers')
+
+    def group_name(self):
+        return "<a href='/admin/main/group/%s'>%s</a>" % (self.group.id, self.group)
+
+    group_name.allow_tags = True
+    group_name.short_description = _('Group')
 
     def __unicode__(self):
         return str(self.day_time)+" "+self.subject.name

@@ -29,7 +29,7 @@ class RoomAdmin(admin.ModelAdmin):
 
 
 class ScheduleAdmin(admin.ModelAdmin):
-    list_display = ['subject', 'day_time', 'teacher_names', 'group', 'room']
+    list_display = ['subject', 'day_time', 'teacher_names', 'group_name', 'room']
     list_display_links = ['subject']
     ordering = ['group__group_name']
     list_filter = ['group__group_name', 'teachers', 'day_time__day', 'day_time__hour']
