@@ -6,7 +6,6 @@
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql:///ScheduleDB</jdbc-url>
       <user-name>root</user-name>
-      <user-password>dfdedfc5dfc5dfd8</user-password>
       <libraries />
     </data-source>
   </component>

@@ -51,7 +51,7 @@ class Migration(SchemaMigration):
         # Adding model 'Room'
         db.create_table(u'main_room', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('room_number', self.gf('django.db.models.fields.CharField')(default='0', max_length=15, blank=True)),
+            ('room_number', self.gf('django.db.models.fields.CharField')(default='0', max_length=255, blank=True)),
             ('faculty', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['main.Faculty'], null=True, blank=True)),
         ))
         db.send_create_signal(u'main', ['Room'])
@@ -163,7 +163,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Room'},
             'faculty': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['main.Faculty']", 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'room_number': ('django.db.models.fields.CharField', [], {'default': "'0'", 'max_length': '15', 'blank': 'True'})
+            'room_number': ('django.db.models.fields.CharField', [], {'default': "'0'", 'max_length': '255', 'blank': 'True'})
         },
         u'main.schedule': {
             'Meta': {'object_name': 'Schedule'},

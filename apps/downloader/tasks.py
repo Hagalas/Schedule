@@ -1,4 +1,4 @@
-from processors import html_from_wimii, teachers_html_from_wimii
+from processors import html_from_wimii, teachers_html_from_wimii, groups_from_wimii
 
 
 def run_processors(file_obj):
@@ -8,7 +8,8 @@ def run_processors(file_obj):
     """
     processors = {
         'html_from_wimii': html_from_wimii.HtmlFromWimiiProcessor,
-        'teachers_html_from_wimii': teachers_html_from_wimii.TeachersHtmlFromWimiiProcessor
+        'teachers_html_from_wimii': teachers_html_from_wimii.TeachersHtmlFromWimiiProcessor,
+        'groups_from_wimii': groups_from_wimii.GroupsHtmlFromWimiiProcessor
     }
 
     processor = processors.get(file_obj.category.code_name, None)

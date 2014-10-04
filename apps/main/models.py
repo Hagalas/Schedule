@@ -117,7 +117,7 @@ class Faculty(models.Model):
 
 
 class Room(models.Model):
-    room_number = models.CharField(_('Room number'), max_length=15, blank=True, default='0')
+    room_number = models.CharField(_('Room number'), max_length=255, blank=True, default='0')
     faculty = models.ForeignKey('Faculty', verbose_name=_('Faculty'), null=True, blank=True)
 
     class Meta:
@@ -125,7 +125,7 @@ class Room(models.Model):
         verbose_name_plural = _('Rooms')
 
     def __unicode__(self):
-        return "%s - %s" % (self.room_number, self.faculty)
+        return "%s" % self.room_number
 
 
 class Teacher(models.Model):

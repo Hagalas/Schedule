@@ -26,4 +26,5 @@ def parse(request, file_id):
         return HttpResponseRedirect('/admin/main/teacher/')
     else:
         return HttpResponseRedirect('/admin/main/schedule/')
+        # return HttpResponseRedirect('/admin/downloader/file/')
 

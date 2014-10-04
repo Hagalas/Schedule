@@ -34,7 +34,7 @@ class ScheduleAdmin(admin.ModelAdmin):
     ordering = ['group__group_name']
     list_filter = ['group__group_name', 'teachers', 'day_time__day', 'day_time__hour']
     search_fields = ['group', 'teachers', 'day_time']
-    list_per_page = 250
+    list_per_page = 50
     filter_horizontal = ['teachers']
 
 

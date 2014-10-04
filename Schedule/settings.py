@@ -15,7 +15,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ScheduleDB',
         'USER': 'root',
-        'PASSWORD': 'toor',
+        'PASSWORD': '',
         'HOST': '',
         'PORT': '',
     }

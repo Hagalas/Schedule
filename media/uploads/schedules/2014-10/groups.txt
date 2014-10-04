@@ -1,0 +1,49 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<meta name="Description" content="Plan">
+<title>Tytuł</title>
+<style type="text/css">
+body {font:bold 10 verdana,sans-serif;background-color:#C0C0C0;color:#000000}
+a:link {font:bold 11 verdana,sans-serif;color:#000000}
+a:visited {font:bold 11 verdana,sans-serif;color:#000000}
+a:active {font:bold 11 verdana,sans-serif;color:#000000}
+a:hover {font:bold 11 verdana,sans-serif;color:#FFFFFF}
+td.a1 {background:#B060FF}
+td.a2 {background:#A050FF}
+td.a3 {background:#9040FF}
+td.a4 {background:#8030FF}
+td.a5 {padding:3pt;font-size:8pt}
+</style>
+</head>
+<body>
+Plan Zajęć na semestr zimowy 2014/2015 WIMiI, PCz<p>
+<br>
+<table width="100%">
+<tr><td><a href="o1.html">Doktoranckie sem. 1
+</a></td><td><a href="o2.html">Doktoranckie sem. 3</a></td><td><a href="o3.html">Doktoranckie sem. 5</a></td><td><a href="o4.html">Doktoranckie sem. 5</a></td><td><a href="o5.html">Doktoranckie sem. 7</a></td></tr>
+<tr><td><a href="o6.html">EFE sem. I</a></td><td><a href="o7.html">EFE sem. III</a></td><td><a href="o8.html">EFE sem. V Specializations CMS</a></td><td><a href="o9.html">EFE sem. VII Specializations CMS</a></td><td><a href="o10.html">MIBM+MTR+ENE+IB I-go st.sem.1 gr.dziekańska 1 lab1</a></td></tr>
+<tr><td><a href="o11.html">MIBM+MTR+ENE+IB I-go st.sem.1 gr.dziekańska 1 lab2</a></td><td><a href="o12.html">MIBM+MTR+ENE+IB I-go st.sem.1 gr.dziekańska 2 lab3</a></td><td><a href="o13.html">MIBM+MTR+ENE+IB I-go st.sem.1 gr.dziekańska 2 lab4</a></td><td><a href="o14.html">MIBM+MTR+ENE+IB I-go st.sem.1 gr.dziekańska 3 lab5</a></td><td><a href="o15.html">MIBM+MTR+ENE+IB I-go st.sem.1 gr.dziekańska 3 lab6</a></td></tr>
+<tr><td><a href="o16.html">MIBM+MTR+ENE+IB I-go st.sem.1 gr.dziekańska 4 lab7</a></td><td><a href="o17.html">MIBM+MTR+ENE+IB I-go st.sem.1 gr.dziekańska 4 lab8</a></td><td><a href="o18.html">MIBM+MTR+ENE+IB I-go st.sem.1 gr.dziekańska 5 lab9</a></td><td><a href="o19.html">MIBM+MTR+ENE+IB I-go st.sem.1gr.dziekańska 5 lab10</a></td><td><a href="o20.html">Energetyka I -go st. sem. 3 gr. dziekańska 1 lab.1</a></td></tr>
+<tr><td><a href="o21.html">Energetyka I -go st. sem. 3 gr. dziekańska 1 lab.2</a></td><td><a href="o22.html">Energetyka .I -go st. sem. 5 RSE gr. 1</a></td><td><a href="o23.html">Energetyka  I -go st. sem. 5 RSE gr. 2</a></td><td><a href="o24.html">Energetyka I -go st. sem. 7 RSE  gr. 1 
+</a></td><td><a href="o25.html">Energetyka I -go st. sem. 7 RSE  gr. 2</a></td></tr>
+<tr><td><a href="o26.html">Informatyka I-go st sem.1 gr.1</a></td><td><a href="o27.html">Informatyka I-go st sem.1 gr.2</a></td><td><a href="o28.html">Informatyka I-go st sem.1 gr.3</a></td><td><a href="o29.html">Informatyka I-go st sem.1 gr.4</a></td><td><a href="o30.html">Informatyka I-go st sem.1 gr.5</a></td></tr>
+<tr><td><a href="o31.html">Informatyka I-go st sem.3 gr. dziekańska 1 lab.1</a></td><td><a href="o32.html">Informatyka I-go st sem.3 gr. dziekańska 1 lab.2</a></td><td><a href="o33.html">Informatyka.I-go st sem.3 gr. dziekańska 2 lab.3</a></td><td><a href="o34.html">Informatyka.I-go st sem.3 gr. dziekańska 2 lab.4</a></td><td><a href="o35.html">Informatyka.I-go st sem.3 gr. dziekańska 3 lab.5</a></td></tr>
+<tr><td><a href="o36.html">Informatyka I-go st sem.3 gr. dziekańska 3 lab.6</a></td><td><a href="o37.html">Informatyka I-go st sem.3 gr. dziekańska 4 lab.7</a></td><td><a href="o38.html">Informatyka I-go st sem.3 gr. dziekańska 4 lab.8</a></td><td><a href="o39.html">Informatyka. I-go st. sem.5 IO gr. lab 1</a></td><td><a href="o40.html">Informatyka. I-go st. sem.5 IO gr. lab 2</a></td></tr>
+<tr><td><a href="o41.html">Informatyka. I-go st. sem.5 PAI gr. lab 1</a></td><td><a href="o42.html">Informatyka. I-go st. sem.5 PAI gr. lab 2</a></td><td><a href="o43.html">Informatyka. I-go st. sem.5 PAI gr. lab 3</a></td><td><a href="o44.html">Informatyka. I-go st. sem.5 SK gr lab.1</a></td><td><a href="o45.html">Informatyka. I-go st. sem.5 SK gr lab.2</a></td></tr>
+<tr><td><a href="o46.html">Informatyka. I-go st. sem.7 IO gr. lab. 1</a></td><td><a href="o47.html">Informatyka. I-go st. sem.7 IO gr. lab. 2</a></td><td><a href="o48.html">Informatyka. I-go st. sem.7 PAI gr. lab. 1</a></td><td><a href="o49.html">Informatyka. I-go st. sem.7 PAI gr. lab. 2</a></td><td><a href="o50.html">Informatyka. I-go st. sem.7 SK</a></td></tr>
+<tr><td><a href="o51.html">Informatyka. II-go st. sem.2 Z  ZSZiAD  gr. lab 1</a></td><td><a href="o52.html">Informatyka. II-go st. sem.2 Z   ZSZiAD gr. lab 2</a></td><td><a href="o53.html">Inż. Biom.I-go st. sem 3 gr. dziekańska 1 lab.1</a></td><td><a href="o54.html">Inż. Biom.I-go st. sem 3 gr. dziekańska 1 lab.2</a></td><td><a href="o55.html">Inżynieria Biomedyczna I-go st. sem 5 IR</a></td></tr>
+<tr><td><a href="o56.html">Inżynieria Biomedyczna I-go st. sem 7 IR</a></td><td><a href="o57.html">Matematyka I-go st sem.1 gr.1</a></td><td><a href="o58.html">Matematyka  I-go st. sem.3 </a></td><td><a href="o59.html">Matematyka  I-go st. sem.5 gr MFiU</a></td><td><a href="o60.html">Matematyka  I-go st. sem.5 gr MP</a></td></tr>
+<tr><td><a href="o61.html">Matematyka  II-go st. sem.1 MFiU </a></td><td><a href="o62.html">Matematyka  II-go st. sem.3 MFiU gr. 1 </a></td><td><a href="o63.html">Matematyka  II-go st. sem.3 MFiU gr. 2</a></td><td><a href="o64.html">MiBM I-go st. sem 3 gr. dziekańska 1 lab.1</a></td><td><a href="o65.html">MiBM I-go st. sem 3 gr. dziekańska 1 lab.2</a></td></tr>
+<tr><td><a href="o66.html">MiBM I-go st. sem 3 gr. dziekańska 2 lab.3</a></td><td><a href="o67.html">MiBM I-go st. sem 3 gr. dziekańska 2 lab.4</a></td><td><a href="o68.html">MiBM I-go st. sem 3 gr. dziekańska 3 lab.5</a></td><td><a href="o69.html">MiBM I-go st. sem 3 gr. dziekańska 3 lab.6</a></td><td><a href="o70.html">MiBM I-go st. sem 5 KPMiU </a></td></tr>
+<tr><td><a href="o71.html">MiBM I-go st. sem 5 PTP </a></td><td><a href="o72.html">MiBM I-go st. sem 5 Spawalnictwo</a></td><td><a href="o73.html">MiBM I-go st. sem 5 ICiS </a></td><td><a href="o74.html">MiBM I-go st. sem 7 APWiR </a></td><td><a href="o75.html">MiBM I-go st. sem 7 ICiS </a></td></tr>
+<tr><td><a href="o76.html">MiBM I-go st. sem 7 KPMiU </a></td><td><a href="o77.html">MiBM I-go st. sem 7 PTSiS </a></td><td><a href="o78.html">MiBM II-go st. sem. 2 APWiR gr. lab. 1</a></td><td><a href="o79.html">MiBM II-go st. sem. 2 APWiR  gr. lab. 2</a></td><td><a href="o80.html">MiBM II-go st. sem. 2 PTP  gr. lab. 1</a></td></tr>
+<tr><td><a href="o81.html">MiBM II-go st. sem. 2 PTP  gr. lab. 2</a></td><td><a href="o82.html">MiBM II-go st. sem. 3 ICiS </a></td><td><a href="o83.html">Mechatronika I-go st. sem 3 gr. 1</a></td><td><a href="o84.html">Mechatronika I-go st. sem 3 gr. 2</a></td><td><a href="o85.html">Mechatronika I-go st. sem 5 PSM</a></td></tr>
+<tr><td><a href="o86.html">Mechatronika I-go st. sem 5 SS</a></td><td><a href="o87.html">Mechatronika I-go st. sem 7 PSM </a></td><td><a href="o88.html">Mechatronika I-go st. sem 7 SS</a></td></table>
+<table border=1 cols=2 width="100%">
+<tr><td class="a1" width="5%"></td><td class="a5" rowspan=4>Astar Plany.<br><a href="http://www.astar05.pl">http://www.astar05.pl</a></td></tr>
+<tr><td class="a2"></td></tr>
+<tr><td class="a3"></td></tr>
+<tr><td class="a4"></td></tr></table>
+</body>
+</html>
