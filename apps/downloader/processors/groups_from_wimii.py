@@ -15,25 +15,19 @@ class GroupsHtmlFromWimiiProcessor(object):
         file_content = str(file_obj.file.file)
         with open(file_content) as html_doc:
             try:
-                teachers_pattern = \
-                    re.compile\
-                    (r'^(\w*-{0,1}\w+)\s{1}(\w+.?)\s{1,2}(\w+.?\s*\w*.?\s{0,1}\w*.?\s*\w*.?\s*\w*.?\s*\w*.?\s*\w*.?)\s*/{1}(\w*)/{1}$',
-                     re.UNICODE)
-                #teachers_pattern = re.compile(r'^', re.UNICODE)
-
                 soup = BeautifulSoup(html_doc)
                 links = [link for link in soup.find_all('a') if link.get_text() != ''][:-1]
                 # last ahref is an advertisement
 
                 groups = []
                 for link in links:
-                    #print link
                     group_name = link.getText().strip()
                     group = Group.objects.get_or_create(
                         group_name=group_name
                     )[0]
                     group.save()
                     groups.append(group)
+                    print link
 #
                     html = urllib2.urlopen('http://wimii.pcz.pl/download/plan_stacjonarny/%s' % link.get('href')).read()
                     html = BeautifulSoup(html)
@@ -56,26 +50,28 @@ class GroupsHtmlFromWimiiProcessor(object):
                                 room_number = ''
                                 day_split = str(day).split('<br>')
 
-                                # if len(day_split) > 4:
-                                #     subject_name = str(day).split('<br>')[0].strip('<td>')
-                                #     if len(subject_name) > 0: is_subject = True
-                                #     teachers = str(day).split('<br>')[1:-1]
-                                #     if len(teachers) > 0:
-                                #         if len(teachers[0]) > 0 \
-                                #                 and teachers[0] != 'zielone' \
-                                #                 and teachers[0] != 'fioletowe'\
-                                #                 and teachers[0] != 'czerwone':
-                                #             print teachers[0]
-                                #             is_teacher = True
-                                #     room_number = \
-                                #         str(day).split('<br>')[-1].split('/')[0].strip('<br>')
-                                #     if len(room_number) > 0: is_room = True
-
-                                if len(day_split) >= 3:
+                                if len(day_split) > 3:
                                     subject_name = str(day).split('<br>')[0].strip('<td>')
                                     if len(subject_name) > 0: is_subject = True
-                                    test = str(day).split('<br>')[1]
-                                    teachers.append(test)
+                                    teachers = str(day).split('<br>')[1:-1]
+                                    teachers = [t for t in teachers if t]  # if string in teachers is empty
+                                    if len(teachers) > 0:
+                                        if len(teachers[0]) > 0 \
+                                                and teachers[0] != 'zielone' \
+                                                and teachers[0] != 'fioletowe'\
+                                                and teachers[0] != 'czerwone' \
+                                                and teachers[0] != 'czarne'\
+                                                and teachers[0] != "1 lab odbędą się 3.10.2014 na /WIPiTM/":
+                                            print teachers[0]
+                                            is_teacher = True
+                                    room_number = \
+                                        str(day).split('<br>')[-1].split('/')[0].strip('<br>')
+                                    if len(room_number) > 0: is_room = True
+
+                                elif len(day_split) == 3:
+                                    subject_name = str(day).split('<br>')[0].strip('<td>')
+                                    if len(subject_name) > 0: is_subject = True
+                                    teachers.append(str(day).split('<br>')[1])
                                     if len(teachers) > 0:
                                         if len(teachers[0]) > 0 \
                                                 and teachers[0] != 'zielone' \
@@ -92,12 +88,20 @@ class GroupsHtmlFromWimiiProcessor(object):
                                 elif len(day_split) == 2:
                                     subject_name = str(day).split('<br>')[0].strip('<td>')
                                     is_subject = True
-                                    room_number = \
-                                        str(day).split('<br>')[1].split('/')[0].strip('<br>')
-                                    is_room = True
+                                    has_td_content = len(str(day).split('<br>')[1].split('/')[0].strip('<br>')) > 0
+                                    if has_td_content:
+                                        if str(day).split('<br>')[1].split('/')[0].strip('<br>')[0]:
+                                            if str(day).split('<br>')[1].split('/')[0].strip('<br>')[0].isupper():
+                                                teachers.append(str(day).split('<br>')[1])
+                                                is_teacher = True
+                                            else:  # if not str(day).split('<br>')[1].split('/')[0].strip('<br>').istitle():
+                                                room_number = \
+                                                    str(day).split('<br>')[1].split('/')[0].strip('<br>')
+                                                is_room = True
 
                                 elif len(day_split) == 1:
-                                    pass
+                                    subject_name = str(day).split('<br>')[0].strip('<td>')
+                                    is_subject = True
 
                                 if is_subject:
                                     subject = Subject.objects.get_or_create(
@@ -105,24 +109,25 @@ class GroupsHtmlFromWimiiProcessor(object):
                                     )[0]
                                     subject.save()
 
+                                if is_subject:
+                                    schedule = Schedule.objects.get_or_create(
+                                        day_time=day_time,
+                                        subject=subject,
+                                        group=group,
+                                    )[0]
+                                    schedule.save()
+
                                 if is_room:
                                     room = Room.objects.get_or_create(
                                         room_number=room_number
                                     )[0]
                                     room.save()
-
-                                if is_room and is_subject:
-                                    schedule = Schedule.objects.get_or_create(
-                                        day_time=day_time,
-                                        subject=subject,
-                                        group=group,
-                                        room=room,
-                                    )[0]
+                                    schedule.room = room
                                     schedule.save()
 
                                 if is_teacher:
                                     for teacher in teachers:
-                                        single_teacher = teacher.split()  # re.findall(teachers_pattern, teachers)[0]
+                                        single_teacher = teacher.split()
                                         teacher = Teacher.objects.get_or_create(
                                             name=single_teacher[1],
                                             surname=single_teacher[0],
