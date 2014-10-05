@@ -1,5 +1,6 @@
 # coding=utf-8
 from django.db import models
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -97,6 +98,10 @@ class Group(models.Model):
         verbose_name = _('Group')
         verbose_name_plural = _('Groups')
 
+    def get_absolute_url(self):
+        return "/groups/%i/" % self.id
+        #return reverse('main.views.details', args=[str(self.id)])
+
     def __unicode__(self):
         return self.group_name  # "%s spec:%s st:%s sem:%s gr:%s" \
                # % (self.field_of_study, self.specialization, self.degree, self.semester, self.group_nr)
@@ -179,6 +184,7 @@ class Schedule(models.Model):
     class Meta:
         verbose_name = _('Schedule Entry')
         verbose_name_plural = _('Schedule')
+        ordering = ['day_time']
 
     def teacher_names(self):
         return ' , '.join(

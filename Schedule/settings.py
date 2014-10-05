@@ -98,6 +98,8 @@ INSTALLED_APPS = LOCAL_APPS + (
     'django.contrib.staticfiles',
 
     'south',
+    'qrcode',
+    'tastypie',
     'grappelli',
     'filebrowser',
     'django.contrib.admin',

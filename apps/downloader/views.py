@@ -22,9 +22,7 @@ def parse(request, file_id):
     file_obj = File.objects.get(id=file_id)
     if file_obj:
         run_processors(file_obj)
-    if file_obj.category.code_name == "teachers_html_from_wimii":   #
+    if file_obj.category.code_name == "teachers_html_from_wimii":
         return HttpResponseRedirect('/admin/main/teacher/')
     else:
         return HttpResponseRedirect('/admin/main/schedule/')
-        # return HttpResponseRedirect('/admin/downloader/file/')
-

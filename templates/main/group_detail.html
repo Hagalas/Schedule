@@ -1,0 +1,14 @@
+{% load qr_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>{{ object.group_name }}</h1>
+    <p class="qrcodeImage">{% qr_from_object object "s" %}
+        {% for entry in entries %}
+            <p>{{ entry }}</p>
+        {% endfor %}
+</body>
+</html>
